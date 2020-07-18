@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>New tab</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
+
+
+	<!-- Background picture change on every new tab opened-->
+		<link href="stylebackgroundchange.css" rel="stylesheet" />
+	<div class = "backgroundChange">
+	 <script src="resize.js"> </script> 
+	</div>
+ 
+</head>
+<body>
+
+<!-- Navigation Bar: Topic Selector-->
+
+<!--responsive nav bar-->
+--<nav class = "navbar navbar-expand-md navbar-dark bg-dark">
+	<ul class = "navbar-nav">
+
+<!--logo-->
+		<div class="container">
+    <a class="navbar-brand" href="#">
+          <img src="https://smartlogic.io/images/brand-assets/smartlogic-logo-teal-150.png" alt="">
+        </a>
+
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+	
+	<!--Topic selector-->
+	
+		 <div class="btn-group">
+    <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">Select a Topic<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class="dropdown-item"><a href="#">Gender Inequality</a></li>
+      <li class="dropdown-item"><a href="#">Environment</a></li>
+      <li class="dropdown-item"><a href="#">Politics</a></li>
+      
+   </ul>
+</div>
+-</ul>
+</nav>
+
+
+
+<!--Script for drop down nav bar to change to text selected-->
+<script>
+	$(".dropdown-menu li a").click(function(){
+  var selText = $(this).text();
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+});
+</script>
+
+
+
+
+<!--- Footer -->
+
+
+
+
+</body>
+</html>
+
+
+
+
