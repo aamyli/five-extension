@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>New tab</title>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -28,49 +29,106 @@
 
 <!--responsive nav bar-->
 --<nav class = "navbar navbar-expand-md navbar-dark bg-dark">
-	<ul class = "navbar-nav">
-
-<!--logo-->
-		<div class="container">
-    <a class="navbar-brand" href="#">
-          <img src="https://smartlogic.io/images/brand-assets/smartlogic-logo-teal-150.png" alt="">
+	
+    <!--logo-->
+   <a class="navbar-brand" href="#">
+          <img src="logo.JPG" alt="logo" width="80" height="80">
         </a>
 
+		<div class="flex-container">
+    	<form class="search" action="">
+    		<select class = "input">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-	
-	<!--Topic selector-->
-	
-		 <div class="btn-group">
-    <a class="btn btn-dark dropdown-toggle" data-toggle="dropdown" href="#">Select a Topic<span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li class="dropdown-item"><a href="#"> Fair Trade</a></li>
-      <li class="dropdown-item"><a href="#">Innovation</a></li>
-      <li class="dropdown-item"><a href="#">Infrastructure</a></li>
-       <li class="dropdown-item"><a href="#">Environmental Sustainability</a></li>
-        <li class="dropdown-item"><a href="#">Consumption & Production</a></li>
-      
-   </ul>
+      <option value = "fairtrade"><a href="#"> Fair Trade</a></li>
+        <option  value = "innovation"><a href="#">Innovation</a></li>
+      <option value = "Infrastructure"><a href="#">Infrastructure</a></li>
+     <option value = "environment"><a href="#">Environmental Sustainability</a></li>
+         <option value = "pollution"><a href="#">Consumption & Production</a></li>
+      </select>
+      <input type = "submit" value = "Find Articles">
+ </form>
 </div>
--</ul>
+
 </nav>
 
 
 
 <!--Script for drop down nav bar to change to text selected-->
-<script>
-	$(".dropdown-menu li a").click(function(){
-  var selText = $(this).text();
-  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
-});
-</script>
 
 
 
 
-<!--- Footer -->
+
+
+<!--Script for API-->
+  <div class="container">
+        <ul class="news-list"></ul>
+    </div>
+
+    <script>
+        const searchFrom = document.querySelector('.search');
+        const input = document.querySelector('.input');
+        const newsList = document.querySelector('.news-list');
+
+        searchFrom.addEventListener('submit', retrieve);
+
+        function retrieve(e) {
+            
+            newsList.innerHTML = ''
+            e.preventDefault()
+            let topic = input.value;
+            const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK'
+
+            let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKey}`
+            console.log(url)
+            fetch(url).then((res) => {
+                return res.json()
+            }).then((data) => {
+                // to trouble shoot: use console.log and click inspect in the browser and go to console to see the output
+                // this shows all the data (open it up to see all the information)
+                console.log(data);
+                // each article is within the docs array (data.response.docs)
+                // an example is the line right below this one, showing the headline
+                console.log(data.response.docs[0].headline);
+                data.response.docs.forEach(doc =>{
+                    // for each of the 10 elements in the array, a list item is created
+                    let li = document.createElement('li');
+                    let h1 = document.createElement('h1');
+                    let h2 = document.createElement('h2');
+                    let a = document.createElement('a');
+                    let p = document.createElement('p');
+
+                    // sets the list content to the headline.main (check inspect > console to find it)
+                    h1.textContent = doc.headline.main;
+                    // adds the "h1" to each list element
+                    li.appendChild(h1);
+
+                    // setting link component
+                    a.setAttribute('href', doc.web_url);
+                    a.setAttribute('target', '_blank');
+                    a.textContent = "READ";
+                    li.appendChild(a);
+                    
+                    // the approach above can be implemented to add any piece of info to the list item (date, subtitle, etc.) for example: 
+
+                    // uses the <p> element to add the abstract for each article as well. 
+                    p.textContent = doc.abstract; 
+                    li.appendChild(p);
+
+                    // uses the <h2> element to display the date
+                    h2.textContent = doc.pub_date; // ** SHOULD FIGURE OUT WAY TO CONVERT THIS TO A BETTER FORMAT
+                    li.appendChild(h2);
+
+                    // adds each list element to the overall list (ul)
+                    newsList.appendChild(li);
+                })
+            }).catch((error)=> {
+                // for troubleshooting (inspect > console to see the error printed out)
+                console.log(error);
+            })
+        }
+    </script>
+
 
 
 
