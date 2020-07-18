@@ -1,28 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,700");
 
 
 
-
-
-
-/*---Media Queries --*/
-@media (max-width: 992px) {
-
-  }
-@media (max-width: 768px) {
-  
-}
-@media (max-width: 576px) {
-  
-}
-
-
-}
-/*--- Bootstrap Padding Fix --*/
-[class*="col-"] {
-    padding: 1rem;
-}
-
+<<<<<<< HEAD
 
 .input {
 	display: block;
@@ -116,6 +96,8 @@ margin: 0 auto;
 
 
 
+=======
+>>>>>>> 3ef7fee91d0ff545a876e098701970ca9ae654bd
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap
@@ -132,11 +114,3 @@ Large (lg) devices (desktops, 992px and up)
 Extra (xl) large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { ... }
 */
-
-
-
-
-
-
-
-
