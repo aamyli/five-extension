@@ -3,87 +3,87 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>New tab</title>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<link href="style.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>New tab</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
 
 
-	<!-- Background picture change on every new tab opened-->
-		<link href="stylebackgroundchange.css" rel="stylesheet" />
-	<div class = "backgroundChange">
-	 <script src="resize.js"> </script> 
-	</div>
- 
+  <!-- Background picture change on every new tab opened-->
+  <link href="stylebackgroundchange.css" rel="stylesheet" />
+  <div class = "backgroundChange">
+      <script src="resize.js"> </script> 
+  </div>
+  
 </head>
 <body>
 
-<!-- Navigation Bar: Topic Selector-->
+    <!-- Navigation Bar: Topic Selector-->
 
-<!--responsive nav bar-->
---<nav class = "navbar navbar-expand-md navbar-dark bg-dark">
-	
-    <!--logo-->
-   <a class="navbar-brand" href="#">
+    <!--responsive nav bar-->
+    --<nav class = "navbar navbar-expand-md navbar-dark bg-dark">
+       
+        <!--logo-->
+        <a class="navbar-brand" href="#">
           <img src="logo.JPG" alt="logo" width="80" height="80">
-        </a>
+      </a>
 
-		<div class="flex-container">
-    	<form class="search" action="">
-    		<select class = "input">
+      <div class="flex-container">
+       <form class="search" action="">
+          <select class = "input">
 
-      <option value = "fairtrade"><a href="#"> Fair Trade</a></li>
-        <option  value = "innovation"><a href="#">Innovation</a></li>
-      <option value = "Infrastructure"><a href="#">Infrastructure</a></li>
-     <option value = "environment"><a href="#">Environmental Sustainability</a></li>
-         <option value = "pollution"><a href="#">Consumption & Production</a></li>
-      </select>
-      <input type = "submit" value = "Find Articles">
- </form>
-</div>
+              <option value = "fairtrade"><a href="#"> Fair Trade</a></li>
+                <option  value = "innovation"><a href="#">Innovation</a></li>
+                  <option value = "Infrastructure"><a href="#">Infrastructure</a></li>
+                   <option value = "environment"><a href="#">Environmental Sustainability</a></li>
+                       <option value = "pollution"><a href="#">Consumption & Production</a></li>
+                       </select>
+                       <input type = "submit" value = "Find Articles">
+                   </form>
+               </div>
 
-</nav>
-
-
-
-<!--Script for drop down nav bar to change to text selected-->
+           </nav>
 
 
+
+           <!--Script for drop down nav bar to change to text selected-->
 
 
 
 
-<!--Script for API-->
-  <div class="container">
-        <ul class="news-list"></ul>
-    </div>
 
-    <script>
-        const searchFrom = document.querySelector('.search');
-        const input = document.querySelector('.input');
-        const newsList = document.querySelector('.news-list');
 
-        searchFrom.addEventListener('submit', retrieve);
+           <!--Script for API-->
+           <div class="container">
+            <ul class="news-list"></ul>
+        </div>
 
-        function retrieve(e) {
-            
-            newsList.innerHTML = ''
-            e.preventDefault()
-            let topic = input.value;
-            const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK'
+        <script>
+            const searchFrom = document.querySelector('.search');
+            const input = document.querySelector('.input');
+            const newsList = document.querySelector('.news-list');
 
-            let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKey}`
-            console.log(url)
-            fetch(url).then((res) => {
-                return res.json()
-            }).then((data) => {
+            searchFrom.addEventListener('submit', retrieve);
+
+            function retrieve(e) {
+                
+                newsList.innerHTML = ''
+                e.preventDefault()
+                let topic = input.value;
+                const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK'
+
+                let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKey}`
+                console.log(url)
+                fetch(url).then((res) => {
+                    return res.json()
+                }).then((data) => {
                 // to trouble shoot: use console.log and click inspect in the browser and go to console to see the output
                 // this shows all the data (open it up to see all the information)
                 console.log(data);
