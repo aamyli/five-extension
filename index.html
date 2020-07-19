@@ -23,7 +23,7 @@
   </div>
   
 </head>
-<body>
+<body onload="firstArticle()">
 
     <!-- Navigation Bar: Topic Selector-->
 
@@ -37,19 +37,19 @@
 
       <div class="flex-container">
        <form class="search" action="">
-          <select class = "input">
+            <select id="mySelect" class = "input">
 
-              <option value = "fairtrade"><a href="#"> Fair Trade</a></li>
-                <option  value = "innovation"><a href="#">Innovation</a></li>
-                  <option value = "Infrastructure"><a href="#">Infrastructure</a></li>
-                   <option value = "environment"><a href="#">Environmental Sustainability</a></li>
-                       <option value = "pollution"><a href="#">Consumption & Production</a></li>
-                       </select>
+                <option value = "trade"><a href="#"> Fair Trade</a></li>
+                <option value = "innovation"><a href="#">Innovation</a></li>
+                <option value = "Infrastructure"><a href="#">Infrastructure</a></li>
+                <option value = "environment"><a href="#">Environmental Sustainability</a></li>
+                <option value = "pollution"><a href="#">Consumption & Production</a></li>
+            </select>
                        <input type = "submit" value = "Find Articles">
-                   </form>
-               </div>
+         </form>
+      </div>
 
-           </nav>
+    </nav>
 
 
 
@@ -60,32 +60,32 @@
             <ul class="news-list"></ul>
         </div>
 
+
+
+
+
+
         <script>
             const searchFrom = document.querySelector('.search');
             const input = document.querySelector('.input');
             const newsList = document.querySelector('.news-list');
-
+            const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK';
             searchFrom.addEventListener('submit', retrieve);
+            //input = document.getElementById("mySelect").value;
 
-            function retrieve(e) {
-                
-                newsList.innerHTML = ''
-                e.preventDefault()
-                let topic = input.value;
-                const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK'
-
-                let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKey}`
+            function firstArticle() {
+                let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=trade&api-key=${apiKey}`
                 console.log(url)
                 fetch(url).then((res) => {
                     return res.json()
                 }).then((data) => {
-                // to trouble shoot: use console.log and click inspect in the browser and go to console to see the output
-                // this shows all the data (open it up to see all the information)
-                console.log(data);
-                // each article is within the docs array (data.response.docs)
-                // an example is the line right below this one, showing the headline
-                console.log(data.response.docs[0].headline);
-                data.response.docs.forEach(doc =>{
+                    // to trouble shoot: use console.log and click inspect in the browser and go to console to see the output
+                    // this shows all the data (open it up to see all the information)
+                    console.log(data);
+                    // each article is within the docs array (data.response.docs)
+                    // an example is the line right below this one, showing the headline
+                    console.log(data.response.docs[0].headline);
+            
                     // for each of the 10 elements in the array, a list item is created
                     let li = document.createElement('li');
                     let h1 = document.createElement('h1');
@@ -94,12 +94,12 @@
                     let p = document.createElement('p');
 
                     // sets the list content to the headline.main (check inspect > console to find it)
-                    h1.textContent = doc.headline.main;
+                    h1.textContent = data.response.docs[0].headline.main;
                     // adds the "h1" to each list element
                     li.appendChild(h1);
 
                     // setting link component
-                    a.setAttribute('href', doc.web_url);
+                    a.setAttribute('href', data.response.docs[0].web_url);
                     a.setAttribute('target', '_blank');
                     a.textContent = "READ";
                     li.appendChild(a);
@@ -107,21 +107,71 @@
                     // the approach above can be implemented to add any piece of info to the list item (date, subtitle, etc.) for example: 
 
                     // uses the <p> element to add the abstract for each article as well. 
-                    p.textContent = doc.abstract; 
+                    p.textContent = data.response.docs[0].abstract; 
                     li.appendChild(p);
 
                     // uses the <h2> element to display the date
-                    h2.textContent = doc.pub_date; // ** SHOULD FIGURE OUT WAY TO CONVERT THIS TO A BETTER FORMAT
+                    h2.textContent = data.response.docs[0].pub_date; // ** SHOULD FIGURE OUT WAY TO CONVERT THIS TO A BETTER FORMAT
                     li.appendChild(h2);
 
                     // adds each list element to the overall list (ul)
                     newsList.appendChild(li);
                 })
-            }).catch((error)=> {
-                // for troubleshooting (inspect > console to see the error printed out)
-                console.log(error);
-            })
-        }
+            }
+
+            // retrieve(e)
+            function retrieve(e) {
+                
+                newsList.innerHTML = ''
+                e.preventDefault()
+                let topic = input.value;
+                
+
+                let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}&api-key=${apiKey}`
+                console.log(url)
+                fetch(url).then((res) => {
+                    return res.json()
+                }).then((data) => {
+                    // to trouble shoot: use console.log and click inspect in the browser and go to console to see the output
+                    // this shows all the data (open it up to see all the information)
+                    console.log(data);
+                    // each article is within the docs array (data.response.docs)
+                    // an example is the line right below this one, showing the headline
+                    console.log(data.response.docs[0].headline);
+            
+                    // for each of the 10 elements in the array, a list item is created
+                    let li = document.createElement('li');
+                    let h1 = document.createElement('h1');
+                    let h2 = document.createElement('h2');
+                    let a = document.createElement('a');
+                    let p = document.createElement('p');
+
+                    // sets the list content to the headline.main (check inspect > console to find it)
+                    h1.textContent = data.response.docs[0].headline.main;
+                    // adds the "h1" to each list element
+                    li.appendChild(h1);
+
+                    // setting link component
+                    a.setAttribute('href', data.response.docs[0].web_url);
+                    a.setAttribute('target', '_blank');
+                    a.textContent = "READ";
+                    li.appendChild(a);
+                    
+                    // the approach above can be implemented to add any piece of info to the list item (date, subtitle, etc.) for example: 
+
+                    // uses the <p> element to add the abstract for each article as well. 
+                    p.textContent = data.response.docs[0].abstract; 
+                    li.appendChild(p);
+
+                    // uses the <h2> element to display the date
+                    h2.textContent = data.response.docs[0].pub_date; // ** SHOULD FIGURE OUT WAY TO CONVERT THIS TO A BETTER FORMAT
+                    li.appendChild(h2);
+
+                    // adds each list element to the overall list (ul)
+                    newsList.appendChild(li);
+                })
+            }
+        
     </script>
 
 
