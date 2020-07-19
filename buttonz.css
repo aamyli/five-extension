@@ -1,20 +1,14 @@
-@ import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
 body {
 	margin: 0;
 	height: 100%;
-	background-image: linear-gradient(to top, #d9afd9 0%, red 100%);
+	background-image: linear-gradient(to top, #d3d3d3 0%, red 100%);
 	background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
 }
-
-.button_container {
-	position: absolute;
-  left: 0;
-  right: 0;
-  top: 30%;
-}
+ h1 {color: rgb(0, 0, 0)}
 
 .description, .link {
   font-family: 'Amatic SC', cursive;
@@ -51,11 +45,12 @@ body {
 .btn:after {
   content: "";
   position: absolute;
+  border: none;
   left: 0;
   top: 0;
   height: 490%;
   width: 140%;
-  background:#FBCCD1;
+  background:rgb(158, 219, 255);
   -webkit-transition: all .5s ease-in-out;
   transition: all .5s ease-in-out;
   -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
