@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>News</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <!-- everything from here and below should be copied over to the HTML doc we are using -->
+    <body style="height:400px"; >
+
+        
+
+    <!-- this is the list that is created with each input call  -->
+    <!-- can change this to a carousel type thing (so only one article appears at a time) -->
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>    
+            <li data-target="#myCarousel" data-slide-to="3"></li>    
+            <li data-target="#myCarousel" data-slide-to="4"></li>          
+        </ol>
+        
+          <div class="carousel-inner">
+        
+            
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+    
+
+    <script>
+          async function findArticlesAsync (i) {
+                        // await response of fetch call
+                        let response =  fetch(url[i]);
+                        // only proceed once promise is resolved
+                        let data =  response.json();
+                        // only proceed once second promise is resolved
+                        console.log(data);
+                        let div = document.createElement('div');
+                        div.classList.add("item");
+                        div.style.width="100%";
+                        div.style.height="100%";
+                        div.style.backgroundColor="blue";
+                        debugger
+                        if (j == 0) {
+                            div.classList.add("active");
+                        }
+
+                        let h1 = document.createElement('h1');
+                        let h2 = document.createElement('h2');
+                        let a = document.createElement('a');
+                        let p = document.createElement('p');
+
+                        h1.textContent = data.response.docs[0].headline.main;
+                        div.appendChild(h1);
+
+                        a.setAttribute('href', data.response.docs[0].web_url);
+                        a.setAttribute('target', '_blank');
+                        a.textContent = "READ";
+                        div.appendChild(a);
+                            
+                        p.textContent = data.response.docs[0].abstract; 
+                        div.appendChild(p);
+
+                        h2.textContent = data.response.docs[0].pub_date; 
+                        div.appendChild(h2);
+
+                        newsList.appendChild(div);
+                }
+       $(function(){
+            // $("p").click(function(){
+            //     $(this).hide();
+            // });
+            // const searchFrom = document.querySelector('.search');
+            // const input = document.querySelector('.input');
+            
+            const newsList = document.querySelector('.carousel-inner');
+            newsList.innerHTML = ''
+            const apiKey = 'R67xub5MH8FbrUMnSODynY8ilBX9qEMK';
+            const topics = ["trade", "economy", "technology", "infrastructure", "sustainability"];
+            const urls = [];
+            for (var i = 0; i < 5; i++) {
+                urls[i] = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topics[i]}&api-key=${apiKey}`;
+                 findArticlesAsync(i);
+            }
+debugger
+
+              
+            let findArticles = async function() {
+                debugger
+            //     newsList.innerHTML = ''
+                //e.preventDefault()
+                for (var j = 0; j < 5; j++) {
+                    console.log(urls[j]);
+                    // await fetch(urls[j]).then((res) => {
+                    //     return res.json()
+                    // }).then((data) => {
+
+                     $.get(urls[i], function (data) {
+                        console.log(data);
+                        let div = document.createElement('div');
+                        div.classList.add("item");
+                        div.style.width="100%";
+                        div.style.height="100%";
+                        div.style.backgroundColor="blue";
+                        debugger
+                        if (j == 0) {
+                            div.classList.add("active");
+                        }
+
+                        let h1 = document.createElement('h1');
+                        let h2 = document.createElement('h2');
+                        let a = document.createElement('a');
+                        let p = document.createElement('p');
+
+                        h1.textContent = data.response.docs[0].headline.main;
+                        div.appendChild(h1);
+
+                        a.setAttribute('href', data.response.docs[0].web_url);
+                        a.setAttribute('target', '_blank');
+                        a.textContent = "READ";
+                        div.appendChild(a);
+                            
+                        p.textContent = data.response.docs[0].abstract; 
+                        div.appendChild(p);
+
+                        h2.textContent = data.response.docs[0].pub_date; 
+                        div.appendChild(h2);
+
+                        newsList.appendChild(div);
+
+                    // }).catch((error)=> {
+                    //     // for troubleshooting (inspect > console to see the error printed out)
+                    //     console.log(error);
+                    // })
+                })
+                }
+debugger
+
+// for (var j = 0; j < 5; j++) {
+//     findArticlesAsync(j);
+// }
+       }});
+        
+    </script>
+
+
+    </body>
+</html>
