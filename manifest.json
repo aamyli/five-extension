@@ -6,7 +6,7 @@
 
    "description": "This extension provides you with 5 new articles everyday, each one corresponding to one of the 5 topics in the SDG, ‘Industry’ ",
 
-   "icons": {"16": "16x16.png",
+   "icons": {"16":"16x16.png",
             "48": "48x48.png",
            "128": "128x128.png"},
 
