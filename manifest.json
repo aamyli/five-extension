@@ -2,11 +2,9 @@
    "manifest_version": 2,
    "name": "five",
    "author": "Armeen Talwandi, Amy Li, Angela Du, Denise Albeanu",
-   "version": "0.1"
+   "version": "0.1",
 
-   "default_locale": "en",
-   "description": "5 topics. 5 articles. 5 minutes. 
- A single sentence can set off a lifetime of change. Every change starts with an idea, and every idea starts with a read. All it takes is 5 minutes a day to jump start your journey to bring about change. This extension provides you with 5 new articles everyday, each one corresponding to one of the 5 topics in the SDG, ‘Industry’",
+   "description": "This extension provides you with 5 new articles everyday, each one corresponding to one of the 5 topics in the SDG, ‘Industry’ ",
 
    "icons": {"16": "16x16.png",
             "48": "48x48.png",
