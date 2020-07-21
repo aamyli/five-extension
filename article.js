@@ -2,8 +2,24 @@ const searchFrom = document.querySelector('.search');
         const input = document.querySelector('.in');
         const newsList = document.querySelector('.news-list');
         const apiKey = 'Q4mbe5TMGgWbz38qGe3lh89xJtEh8pkj';
-        const index = Math.floor(Math.random() * 10) + 0;
-    
+        const index = Math.floor(Math.random() * 10) + 0
+
+
+          window.addEventListener('load', function () {
+                firstArticle();
+        });
+
+            document.getElementById("first").addEventListener("click", firstArticle);
+            document.getElementById("second").addEventListener("click", secondArticle);
+            document.getElementById("third").addEventListener("click", thirdArticle);
+            document.getElementById("fourth").addEventListener("click", fourthArticle);
+            document.getElementById("fifth").addEventListener("click", fifthArticle);
+
+
+
+
+
+
         function firstArticle() {
                 let url = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=trade&api-key=${apiKey}`;
                 let topic = "FAIR TRADE";
